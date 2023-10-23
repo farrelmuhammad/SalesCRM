@@ -29,6 +29,13 @@ namespace SalesCRM.Controllers
                           Problem("Entity set 'ApplicationDbContext.SalesLead'  is null.");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetSalesLeads()
+        {
+            var salesLeads = await _context.SalesLead.ToListAsync(); // Gantilah ini dengan cara mengambil data dari database sesuai model Anda.
+            return Json(salesLeads); // Mengembalikan data dalam format JSON
+        }
+
         // GET: Leads/Details/5
         public async Task<IActionResult> Details(int? id)
         {

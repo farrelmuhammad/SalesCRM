@@ -8,56 +8,74 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SalesCRM.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SalesCRM</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Leads" asp-action="Index">Sales Lead</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TaskEntities" asp-action="Index">Task</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inventories" asp-action="Index">Inventory</a>
-                        </li>
-                    </ul>
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle">
+            <i class="bx bx-menu" id="header-toggle"></i>
+        </div>
+        @* <div class="header_img">
+            <img src="https://i.imgur.com/hczKIze.jpg" alt="" />
+        </div> *@
+
+        <partial name="_LoginPartial" />
+
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a class="nav_logo" asp-area="" asp-controller="Home" asp-action="Index">
+                    <svg width="30" height="35" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <circle cx="19" cy="19" r="19" fill="url(#pattern0)" />
+                        <defs>
+                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_546_462" transform="translate(-0.00217391) scale(0.00434783)" />
+                            </pattern>
+                            <image id="image0_546_462" width="231" height="230" xlink:href="data:image/png;base64,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" />
+                        </defs>
+                    </svg>
+
+                    @* <i class="bx bx-layer nav_logo-icon"></i> *@
+                    <span style="color: #F9C017;" class="nav_logo-name fs-5">Admin Panel</span>
+                </a>
+                <div class="nav_list">
+                    <a class="nav_link active" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="bx bx-grid-alt nav_icon"></i><span class="nav_name">Home</span>
+                    </a>
+                    <a class="nav_link" asp-area="" asp-controller="Leads" asp-action="Index">
+                        <i class="bx bx-user nav_icon"></i><span class="nav_name">Sales Lead</span>
+                    </a>
+                    <a class="nav_link" asp-area="" asp-controller="Customers" asp-action="Index">
+                        <i class="bx bx-message-square-detail nav_icon"></i><span class="nav_name">Customer</span>
+                    </a>
+                    <a class="nav_link" asp-area="" asp-controller="TaskEntities" asp-action="Index">
+                        <i class="bx bx-bookmark nav_icon"></i><span class="nav_name">Task</span>
+                    </a>
+                    <a class="nav_link" asp-area="" asp-controller="Products" asp-action="Index">
+                        <i class="bx bx-folder nav_icon"></i><span class="nav_name">Products</span>
+                    </a>
+                    <a class="nav_link" asp-area="" asp-controller="Inventories" asp-action="Index">
+                        <i class="bx bx-bar-chart-alt-2 nav_icon"></i><span class="nav_name">Inventory</span>
+                    </a>
                 </div>
             </div>
-            <partial name="_LoginPartial" />
+
+            <form id="logoutForm" class="nav_link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <i class="bx bx-log-out nav_icon"></i>
+                <button id="logout" type="submit" class="btn btn-link text-light">
+                    <span class="nav_name">SignOut</span>
+                </button>
+            </form>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - SalesCRM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <div class="height-100 bg-light">
+        <main role="main" class="pt-5 mt-5">@RenderBody()</main>
+    </div>
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -66,6 +84,45 @@
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable();
+        });
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            const showNavbar = (toggleId, navId, bodyId, headerId) => {
+                const toggle = document.getElementById(toggleId),
+                    nav = document.getElementById(navId),
+                    bodypd = document.getElementById(bodyId),
+                    headerpd = document.getElementById(headerId)
+
+                // Validate that all variables exist
+                if (toggle && nav && bodypd && headerpd) {
+                    toggle.addEventListener('click', () => {
+                        // show navbar
+                        nav.classList.toggle('show')
+                        // change icon
+                        toggle.classList.toggle('bx-x')
+                        // add padding to body
+                        bodypd.classList.toggle('body-pd')
+                        // add padding to header
+                        headerpd.classList.toggle('body-pd')
+                    })
+                }
+            }
+
+            showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
+
+            /*===== LINK ACTIVE =====*/
+            const linkColor = document.querySelectorAll('.nav_link')
+
+            function colorLink() {
+                if (linkColor) {
+                    linkColor.forEach(l => l.classList.remove('active'))
+                    this.classList.add('active')
+                }
+            }
+            linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+            // Your code to run since DOM is loaded and ready
         });
     </script>
 
