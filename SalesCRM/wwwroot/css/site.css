@@ -17,6 +17,18 @@ body {
   margin-bottom: 60px;
 }
 
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+    font-family: Roboto, sans-serif;
+}
+
+#chart {
+    max-width: 650px;
+    margin: 35px auto;
+}
+
+
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 :root {
